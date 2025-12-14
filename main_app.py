@@ -30,9 +30,9 @@ with st.sidebar:
     st.header("Настройки")
 
     api_key = st.text_input(
-        "API Key OpenWeatherMap", 
+        "API ключ OpenWeatherMap", 
         type="password",
-        help="Введите ваш API ключ OpenWeatherMap"
+        help="API ключ OpenWeatherMap можно получить на сайте https://openweathermap.org/"
     )
     
     uploaded_file = st.file_uploader("Загрузите исторические данные (CSV)", type=['csv'])
@@ -494,7 +494,7 @@ def main():
                 st.info("Polars автоматически использует многопоточность для большинства операций")
 
                 df_size = st.slider("Увеличьте в несколько раз размер данных для наилучшего результата теста", 1, 1000, 100)
-                if st.button("Запустить тест производительности"):
+                if st.button("Запустить тест скорости производительности"):
                     with st.spinner("Тестируем последовательную обработку..."):
                         _, seq_time = process_sequential(df_size)
                     
@@ -522,7 +522,7 @@ def main():
                     "**Асинхронные запросы**: Эффективны для одновременных запросов к нескольким городам"
                 )
                 
-                if api_key and st.button("Тест скорости API-запросов"):
+                if api_key and st.button("Запустить тест скорости API-запросов"):
                     sync_times = []
                     for _ in range(len(cities)):
                         start = time.time()
