@@ -37,10 +37,11 @@ with st.sidebar:
     
     uploaded_file = st.file_uploader("Загрузите исторические данные (CSV)", type=['csv'])
     st.session_state.uploaded_df = uploaded_file
-    df = pd.read_csv(uploaded_file)
-    
-    cities = df['city'].unique().tolist()
-    selected_city = st.selectbox("Выберите город", cities)
+
+    if st.session_state.uploaded_df is not None:
+        df = pd.read_csv(st.session_state.uploaded_df)
+        cities = df['city'].unique().tolist()
+        selected_city = st.selectbox("Выберите город", cities)
     
     st.subheader("Параметры анализа")
     window_size = st.slider("Размер окна скользящего среднего (дни)", 7, 90, 30)
